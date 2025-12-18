@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operation Cobalt Kitty Crime Script - Cornish Framework</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background: #f5f5f5; padding: 20px; line-height: 1.5; }
+        .container { max-width: 1400px; margin: 0 auto; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+        .header { background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: white; padding: 40px; text-align: center; }
+        .header h1 { font-size: 2.2em; margin-bottom: 10px; }
+        .header p { font-size: 1.1em; opacity: 0.9; }
+        .controls { background: #f8f9fa; padding: 20px; display: flex; gap: 10px; flex-wrap: wrap; }
+        .controls input, .controls select, .controls button { padding: 10px 15px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px; }
+        .controls input { flex: 1; min-width: 250px; }
+        .controls button { background: #2a5298; color: white; border: none; cursor: pointer; font-weight: 600; }
+        .controls button:hover { background: #1e3c72; }
+        .controls .print-btn { background: #10b981; }
+        .content { padding: 30px; }
+        .stage { margin-bottom: 25px; border: 2px solid #e0e0e0; border-radius: 8px; overflow: hidden; }
+        .stage-header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+        .stage-header:hover { background: linear-gradient(135deg, #5568d3 0%, #6a4190 100%); }
+        .stage-title { display: flex; align-items: center; gap: 20px; }
+        .stage-number { width: 50px; height: 50px; background: rgba(255,255,255,0.2); border: 2px solid white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5em; font-weight: bold; }
+        .stage-info h2 { font-size: 1.4em; margin-bottom: 5px; }
+        .stage-info p { font-size: 0.95em; opacity: 0.95; }
+        .toggle-icon { font-size: 1.3em; }
+        .stage-content { display: none; }
+        .stage-content.active { display: block; }
+        table { width: 100%; border-collapse: collapse; }
+        thead { background: #f8f9fa; }
+        th { padding: 12px; text-align: left; font-size: 0.75em; text-transform: uppercase; color: #666; font-weight: 700; border-bottom: 2px solid #ddd; }
+        td { padding: 15px 12px; border-bottom: 1px solid #eee; vertical-align: top; }
+        tbody tr:hover { background: #f9f9f9; }
+        .action-name { font-weight: 700; color: #1e3c72; margin-bottom: 3px; }
+        .action-details { color: #555; font-size: 0.9em; }
+        .tactic-badge { display: inline-block; padding: 4px 10px; background: #667eea; color: white; border-radius: 15px; font-size: 0.8em; font-weight: 600; }
+        .technique { background: #f1f3f5; padding: 5px 8px; border-radius: 4px; font-family: monospace; font-size: 0.75em; margin: 3px 0; display: block; }
+        .citation { font-style: italic; color: #666; font-size: 0.85em; background: #f8f9fa; padding: 6px; border-radius: 4px; border-left: 3px solid #10b981; }
+        @media print { .controls { display: none; } .stage-content { display: block !important; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Operation Cobalt Kitty - Crime Script Analysis</h1>
+            <p>Cornish's Seven-Stage Framework | OceanLotus Group (APT32)</p>
+        </div>
+        
+        <div class="controls">
+            <input type="text" id="searchInput" placeholder="Search...">
+            <button onclick="toggleAll()">Expand All</button>
+            <button onclick="window.print()" class="print-btn">Print</button>
+        </div>
+        
+        <div class="content">
+            <!-- STAGE 1 -->
+            <div class="stage">
+                <div class="stage-header" onclick="toggleStage(1)">
+                    <div class="stage-title">
+                        <div class="stage-number">1</div>
+                        <div class="stage-info">
+                            <h2>Stage 1: Preparation</h2>
+                            <p>Infrastructure setup and tool acquisition</p>
+                        </div>
+                    </div>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="stage-content">
+                    <table><thead><tr><th>Action</th><th>Details</th><th>MITRE</th><th>Citation</th></tr></thead><tbody>
+                    <tr><td><div class="action-name">Establish C2 Infrastructure</div></td><td>Set up multiple C2 servers protected by CloudFlare; register domains with DNS privacy services</td><td><span class="tactic-badge">Resource Dev</span><br><span class="technique">T1583.001</span></td><td><div class="citation">"Most of the C&C servers IP addresses are protected by CloudFlare and SECURED SERVERS LLC" (Arsenal, p.4)</div></td></tr>
+                    <tr><td><div class="action-name">Acquire Cobalt Strike</div></td><td>Obtain commercial framework; customize malleable C2 profiles (Amazon, Google, Pandora, OSCP)</td><td><span class="tactic-badge">Resource Dev</span><br><span class="technique">T1588.002</span></td><td><div class="citation">"The adversaries extensively used this framework during this attack" (Arsenal, p.28)</div></td></tr>
+                    <tr><td><div class="action-name">Develop Custom Backdoors</div></td><td>Create Denis & Goopy backdoors with DNS tunneling; use sophisticated PE modification engine</td><td><span class="tactic-badge">Resource Dev</span><br><span class="technique">T1587.001</span></td><td><div class="citation">"The binaries were generated using a highly-sophisticated PE modification engine" (Arsenal, p.4)</div></td></tr>
+                    <tr><td><div class="action-name">Create Outlook Backdoor</div></td><td>Develop VbaProject.OTM macro for C2 via email; implement $$cpte/$$ecpte markers</td><td><span class="tactic-badge">Resource Dev</span><br><span class="technique">T1587.001</span></td><td><div class="citation">"This backdoor is very unique and was not documented before to be used in APTs" (Arsenal, p.25)</div></td></tr>
+                    <tr><td><div class="action-name">Customize Credential Tools</div></td><td>Modify 14 versions of Mimikatz; prepare custom Outlook/Windows credential dumpers</td><td><span class="tactic-badge">Resource Dev</span><br><span class="technique">T1588.002</span></td><td><div class="citation">"The attackers successfully uploaded and executed at least 14 unique Mimikatz payloads" (Arsenal, p.38)</div></td></tr>
+                    </tbody></table>
+                </div>
+            </div>
+
+            <!-- STAGE 2 -->
+            <div class="stage">
+                <div class="stage-header" onclick="toggleStage(2)">
+                    <div class="stage-title">
+                        <div class="stage-number">2</div>
+                        <div class="stage-info">
+                            <h2>Stage 2: Entry</h2>
+                            <p>Initial access through spear-phishing</p>
+                        </div>
+                    </div>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="stage-content">
+                    <table><thead><tr><th>Action</th><th>Details</th><th>MITRE</th><th>Citation</th></tr></thead><tbody>
+                    <tr><td><div class="action-name">Spear-Phishing Campaign</div></td><td>Send targeted emails to high-profile employees using job application pretext</td><td><span class="tactic-badge">Initial Access</span><br><span class="technique">T1566.001/002</span></td><td><div class="citation">"The penetration vector...was social engineering, specifically spear-phishing attacks against carefully selected, high-profile targets" (Lifecycle, p.3)</div></td></tr>
+                    <tr><td><div class="action-name">Deploy Fake Flash Installer</div></td><td>Redirector site downloads fake installer; launches fileless infection; downloads encrypted payload</td><td><span class="tactic-badge">Execution</span><br><span class="technique">T1204.002</span></td><td><div class="citation">"The fake Flash installer launches a multi-stage fileless infection process" (Lifecycle, p.3)</div></td></tr>
+                    <tr><td><div class="action-name">Execute Malicious Macros</div></td><td>Word documents create scheduled tasks; download .jpg files containing PowerShell/VBScript</td><td><span class="tactic-badge">Execution</span><br><span class="technique">T1059.005</span></td><td><div class="citation">"The malicious macro creates two scheduled tasks that download files camouflaged as '.jpg' files" (Lifecycle, p.4)</div></td></tr>
+                    <tr><td><div class="action-name">Download Cobalt Strike Beacon</div></td><td>Obfuscated PowerShell loads Beacon in memory; establishes C2 communication</td><td><span class="tactic-badge">Execution</span><br><span class="technique">T1059.001</span></td><td><div class="citation">"Quick memory analysis of the payload reveals that it is a Cobalt Strike Beacon" (Lifecycle, p.6)</div></td></tr>
+                    </tbody></table>
+                </div>
+            </div>
+
+            <!-- STAGE 3 -->
+            <div class="stage">
+                <div class="stage-header" onclick="toggleStage(3)">
+                    <div class="stage-title">
+                        <div class="stage-number">3</div>
+                        <div class="stage-info">
+                            <h2>Stage 3: Pre-condition</h2>
+                            <p>Establish persistence and reconnaissance</p>
+                        </div>
+                    </div>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="stage-content">
+                    <table><thead><tr><th>Action</th><th>Details</th><th>MITRE</th><th>Citation</th></tr></thead><tbody>
+                    <tr><td><div class="action-name">Registry Persistence</div></td><td>Modify HKCU/HKLM Run keys to execute VBScript/PowerShell from ProgramData folder</td><td><span class="tactic-badge">Persistence</span><br><span class="technique">T1547.001</span></td><td><div class="citation">"The attackers used the Windows Registry Autorun to execute VBScript and PowerShell scripts" (Lifecycle, p.9)</div></td></tr>
+                    <tr><td><div class="action-name">Deploy Denis Backdoor</div></td><td>Exploit phantom DLL hijacking in SearchIndexer.exe; place fake msfte.dll in System32</td><td><span class="tactic-badge">Persistence</span><br><span class="technique">T1574.002</span></td><td><div class="citation">"The 'msfte.dll' payloads exploits a rather rare 'phantom DLL hijacking' vulnerability" (Arsenal, p.5)</div></td></tr>
+                    <tr><td><div class="action-name">Create Scheduled Tasks</div></td><td>Establish tasks for PowerShell loaders and Google Update exploitation</td><td><span class="tactic-badge">Persistence</span><br><span class="technique">T1053.005</span></td><td><div class="citation">"The attackers used scheduled tasks to ensure the malicious payloads ran in predetermined timeframes" (Lifecycle, p.11)</div></td></tr>
+                    <tr><td><div class="action-name">Network Reconnaissance</div></td><td>Scan networks using PowerShell; enumerate hosts, services, OS fingerprinting</td><td><span class="tactic-badge">Discovery</span><br><span class="technique">T1046</span></td><td><div class="citation">"Cybereason observed network scanning against entire ranges as well as specific machines" (Lifecycle, p.22)</div></td></tr>
+                    <tr><td><div class="action-name">Information Gathering</div></td><td>Use netsh, ipconfig, net user/group, WMI for system/network enumeration</td><td><span class="tactic-badge">Discovery</span><br><span class="technique">T1087/T1018</span></td><td><div class="citation">"The attackers used several tools built into the Windows OS to gather information" (Lifecycle, p.23)</div></td></tr>
+                    </tbody></table>
+                </div>
+            </div>
+
+            <!-- STAGE 4 -->
+            <div class="stage">
+                <div class="stage-header" onclick="toggleStage(4)">
+                    <div class="stage-title">
+                        <div class="stage-number">4</div>
+                        <div class="stage-info">
+                            <h2>Stage 4: Instrumental Pre-condition</h2>
+                            <p>Privilege escalation and credential harvesting</p>
+                        </div>
+                    </div>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="stage-content">
+                    <table><thead><tr><th>Action</th><th>Details</th><th>MITRE</th><th>Citation</th></tr></thead><tbody>
+                    <tr><td><div class="action-name">Dump Credentials</div></td><td>Use Mimikatz to dump LSASS memory and SAM database; harvest NTLM hashes and Kerberos tickets</td><td><span class="tactic-badge">Credential Access</span><br><span class="technique">T1003.001/002</span></td><td><div class="citation">"The main tool used to obtain credentials from the compromised machines was a obfuscated and sometimes slightly modified versions of Mimikatz" (Lifecycle, p.25)</div></td></tr>
+                    <tr><td><div class="action-name">Harvest Outlook Credentials</div></td><td>Deploy custom PowerShell script (doutlook.ps1) to extract Outlook passwords from registry</td><td><span class="tactic-badge">Credential Access</span><br><span class="technique">T1555.003</span></td><td><div class="citation">"The attackers showed particular interest in obtaining the Outlook passwords of their victims" (Arsenal, p.44)</div></td></tr>
+                    <tr><td><div class="action-name">Hook Password Changes</div></td><td>Deploy HookPasswordChange DLL to capture new passwords when changed by users/IT</td><td><span class="tactic-badge">Credential Access</span><br><span class="technique">T1056.004</span></td><td><div class="citation">"This tool alerts the attackers if passwords are changed...This provided the attackers a workaround to the frequent password resets" (Lifecycle, p.25)</div></td></tr>
+                    <tr><td><div class="action-name">Privilege Escalation</div></td><td>Use PowerSploit's Invoke-AllChecks to scan for privilege escalation vulnerabilities</td><td><span class="tactic-badge">Privilege Esc</span><br><span class="technique">T1068</span></td><td><div class="citation">"The Invoke-AllChecks command is indicative to the PowerUp privilege escalation 'scanner', which is part of the PowerSploit project" (Lifecycle, p.25)</div></td></tr>
+                    </tbody></table>
+                </div>
+            </div>
+
+            <!-- STAGE 5 -->
+            <div class="stage">
+                <div class="stage-header" onclick="toggleStage(5)">
+                    <div class="stage-title">
+                        <div class="stage-number">5</div>
+                        <div class="stage-info">
+                            <h2>Stage 5: Instrumental Initiation</h2>
+                            <p>Lateral movement and network expansion</p>
+                        </div>
+                    </div>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="stage-content">
+                    <table><thead><tr><th>Action</th><th>Details</th><th>MITRE</th><th>Citation</th></tr></thead><tbody>
+                    <tr><td><div class="action-name">Pass-the-Hash Attacks</div></td><td>Use stolen NTLM hashes to authenticate to remote systems without plaintext passwords</td><td><span class="tactic-badge">Lateral Movement</span><br><span class="technique">T1550.002</span></td><td><div class="citation">"The attackers successfully carried out pass-the-hash and pass-the-ticket attacks using stolen NTLM hashes and Kerberos tickets" (Lifecycle, p.27)</div></td></tr>
+                    <tr><td><div class="action-name">Pass-the-Ticket Attacks</div></td><td>Use stolen Kerberos tickets from compromised accounts for lateral movement</td><td><span class="tactic-badge">Lateral Movement</span><br><span class="technique">T1550.003</span></td><td><div class="citation">"Using the compromised administrative account, the attackers moved laterally, deployed their tools and mass-infected other machines" (Lifecycle, p.27)</div></td></tr>
+                    <tr><td><div class="action-name">Windows Admin Shares</div></td><td>Use net.exe to access hidden shares (C$, admin$); copy tools to remote machines</td><td><span class="tactic-badge">Lateral Movement</span><br><span class="technique">T1021.002</span></td><td><div class="citation">"Another lateral movement technique that was used extensively in the attack involved using the Windows Admin Shares via the built-in Windows 'net.exe' tool" (Lifecycle, p.28)</div></td></tr>
+                    <tr><td><div class="action-name">WMI Propagation</div></td><td>Use WMI to copy Denis backdoor DLL to remote machines; restart Wsearch service</td><td><span class="tactic-badge">Lateral Movement</span><br><span class="technique">T1047</span></td><td><div class="citation">"The attackers used a well-documented lateral movement technique that abuses Windows Management Instrumentation (WMI)" (Lifecycle, p.29)</div></td></tr>
+                    <tr><td><div class="action-name">Deploy Remote Access Tools</div></td><td>Install NetCat (renamed kb-10233.exe); configure for proxy bypass</td><td><span class="tactic-badge">Command & Control</span><br><span class="technique">T1219</span></td><td><div class="citation">"The attackers uploaded and executed this customized version of NetCat on several machines" (Lifecycle, p.21)</div></td></tr>
+                    </tbody></table>
+                </div>
+            </div>
+
+            <!-- STAGE 6 -->
+            <div class="stage">
+                <div class="stage-header" onclick="toggleStage(6)">
+                    <div class="stage-title">
+                        <div class="stage-number">6</div>
+                        <div class="stage-info">
+                            <h2>Stage 6: Doing (Core Criminal Act)</h2>
+                            <p>C2 communication and data exfiltration</p>
+                        </div>
+                    </div>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="stage-content">
+                    <table><thead><tr><th>Action</th><th>Details</th><th>MITRE</th><th>Citation</th></tr></thead><tbody>
+                    <tr><td><div class="action-name">DNS Tunneling C2</div></td><td>Denis/Goopy backdoors use DNS tunneling via Google DNS (8.8.8.8) and OpenDNS (208.67.222.222)</td><td><span class="tactic-badge">C2</span><br><span class="technique">T1071.004</span></td><td><div class="citation">"By communicating with known DNS servers, the attackers ensured that the backdoor's traffic will not be filtered" (Lifecycle, p.18)</div></td></tr>
+                    <tr><td><div class="action-name">Cobalt Strike C2</div></td><td>Use malleable C2 profiles mimicking Amazon, Google Safe Browsing, Pandora, OSCP</td><td><span class="tactic-badge">C2</span><br><span class="technique">T1071.001</span></td><td><div class="citation">"The analyzed traffic matched Cobalt Strike's Malleable C2" (Lifecycle, p.17)</div></td></tr>
+                    <tr><td><div class="action-name">Outlook C2 Channel</div></td><td>Replace VbaProject.OTM with backdoor macro; receive commands via Gmail; parse $$cpte markers</td><td><span class="tactic-badge">C2</span><br><span class="technique">T1114</span></td><td><div class="citation">"Using this backdoor, the attackers managed to send system commands via emails from a Gmail address" (Lifecycle, p.20)</div></td></tr>
+                    <tr><td><div class="action-name">Identify Sensitive Data</div></td><td>Target proprietary documents, trade secrets from high-profile departments</td><td><span class="tactic-badge">Collection</span><br><span class="technique">T1083</span></td><td><div class="citation">"They attempted to exfiltrate sensitive documents from the targeted departments that contained trade secrets and other proprietary information" (Arsenal, p.28)</div></td></tr>
+                    <tr><td><div class="action-name">Exfiltrate via Email</div></td><td>Outlook macro sends data as email attachments; obtains addresses from deleted items; cleans sent items</td><td><span class="tactic-badge">Exfiltration</span><br><span class="technique">T1048.003</span></td><td><div class="citation">"The macro will send the requested data back to the attackers as an attachment, after it obtains the address from the deleted items folder" (Arsenal, p.27)</div></td></tr>
+                    </tbody></table>
+                </div>
+            </div>
+
+            <!-- STAGE 7 -->
+            <div class="stage">
+                <div class="stage-header" onclick="toggleStage(7)">
+                    <div class="stage-title">
+                        <div class="stage-number">7</div>
+                        <div class="stage-info">
+                            <h2>Stage 7: Post-condition (Exit)</h2>
+                            <p>Maintain access and cover tracks</p>
+                        </div>
+                    </div>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="stage-content">
+                    <table><thead><tr><th>Action</th><th>Details</th><th>MITRE</th><th>Citation</th></tr></thead><tbody>
+                    <tr><td><div class="action-name">Maintain Persistent Access</div></td><td>Keep multiple backdoors active (Denis, Goopy, Outlook); maintain covert access for re-entry</td><td><span class="tactic-badge">Persistence</span><br><span class="technique">T1546</span></td><td><div class="citation">"It is not very common to see multiple backdoors from the same threat actors residing on the same compromised machines" (Arsenal, p.18)</div></td></tr>
+                    <tr><td><div class="action-name">Adapt and Evade</div></td><td>When detected, pause operations 48hrs-4 weeks; develop workarounds; introduce new tools</td><td><span class="tactic-badge">Defense Evasion</span><br><span class="technique">T1027</span></td><td><div class="citation">"The attackers were extremely persistent. Even when their campaign was exposed...They took 'pauses'...and used the downtime to learn from their 'mistakes'" (Profile, p.2)</div></td></tr>
+                    <tr><td><div class="action-name">Delete Detection Evidence</div></td><td>Outlook macro deletes command emails from inbox and sent items after execution</td><td><span class="tactic-badge">Defense Evasion</span><br><span class="technique">T1070.008</span></td><td><div class="citation">"The backdoor authors were keen to dispose of the evidence quickly to avoid raising any suspicions from the victims" (Arsenal, p.26)</div></td></tr>
+                    <tr><td><div class="action-name">Monitor for Detection</div></td><td>Continue reconnaissance; observe IT security responses; adjust TTPs accordingly</td><td><span class="tactic-badge">Defense Evasion</span><br><span class="technique">T1497</span></td><td><div class="citation">"The members of the OceanLotus Group demonstrated a remarkable ability to quickly adapt, introduce new tools and fine tune existing ones to bypass security solutions" (Profile, p.2)</div></td></tr>
+                    <tr><td><div class="action-name">Maintain Operational Security</div></td><td>Compromise 35+ machines including Active Directory; maintain C2 across multiple channels</td><td><span class="tactic-badge">Impact</span><br><span class="technique">T1657</span></td><td><div class="citation">"The attackers compromised more than 35 machines, including the Active Directory server" (Lifecycle, p.25)</div></td></tr>
+                    </tbody></table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleStage(num) {
+            const stage = document.querySelectorAll('.stage')[num - 1];
+            const content = stage.querySelector('.stage-content');
+            const header = stage.querySelector('.stage-header');
+            content.classList.toggle('active');
+            header.classList.toggle('active');
+        }
+
+        function toggleAll() {
+            const contents = document.querySelectorAll('.stage-content');
+            const allActive = Array.from(contents).every(c => c.classList.contains('active'));
+            contents.forEach(content => {
+                if (allActive) content.classList.remove('active');
+                else content.classList.add('active');
+            });
+            document.querySelectorAll('.stage-header').forEach(h => {
+                if (allActive) h.classList.remove('active');
+                else h.classList.add('active');
+            });
+        }
+
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            document.querySelectorAll('tbody tr').forEach(row => {
+                const text = row.textContent.toLowerCase();
+                row.style.display = text.includes(searchTerm) ? '' : 'none';
+            });
+        });
+    </script>
+</body>
+</html>

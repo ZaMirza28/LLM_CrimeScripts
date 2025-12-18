@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crime Script Analysis: TU/e Cyberattack (January 2025)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+
+        .download-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 24px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .download-section h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .download-section p {
+            margin-bottom: 16px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .download-btn {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid white;
+            padding: 10px 16px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .download-btn:hover {
+            background-color: white;
+            color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .note {
+            background-color: #e8f4f8;
+            border-left: 5px solid #667eea;
+            padding: 18px;
+            margin-bottom: 30px;
+            border-radius: 6px;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        h2 {
+            color: #333;
+            margin-top: 40px;
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #667eea;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 40px;
+            font-size: 13px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        table thead {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        table th {
+            padding: 18px 14px;
+            text-align: left;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: none;
+            word-break: break-word;
+        }
+
+        table td {
+            padding: 16px 14px;
+            border: 1px solid #e0e0e0;
+            vertical-align: top;
+            line-height: 1.5;
+        }
+
+        table tbody tr {
+            transition: background-color 0.2s ease;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        table tbody tr:hover {
+            background-color: #f8f9ff;
+        }
+
+        table tbody tr:nth-child(even) {
+            background-color: #f5f5f5;
+        }
+
+        table tbody tr:nth-child(even):hover {
+            background-color: #eff0ff;
+        }
+
+        .stage-header {
+            background: linear-gradient(90deg, #764ba2 0%, #667eea 100%);
+            color: white;
+            font-weight: 700;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        .stage-header td {
+            padding: 20px 16px;
+            border: none;
+        }
+
+        .citation {
+            color: #667eea;
+            font-weight: 600;
+            font-size: 11px;
+            cursor: help;
+        }
+
+        table ul {
+            margin: 8px 0 8px 20px;
+            padding: 0;
+        }
+
+        table li {
+            margin: 6px 0;
+            line-height: 1.5;
+            list-style-position: inside;
+        }
+
+        table li::marker {
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        strong {
+            color: #333;
+            font-weight: 600;
+        }
+
+        table strong {
+            display: block;
+            margin-top: 10px;
+            margin-bottom: 8px;
+            color: #764ba2;
+        }
+
+        table strong:first-child {
+            margin-top: 0;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 1024px) {
+            table {
+                font-size: 12px;
+            }
+
+            table th, table td {
+                padding: 12px 10px;
+            }
+
+            .download-section {
+                padding: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="download-section">
+        <h3>Export Options</h3>
+        <p>Click the buttons below to download this table in editable formats:</p>
+        <button class="download-btn" onclick="exportToCSV()">Download as CSV (Excel/Sheets)</button>
+        <button class="download-btn" onclick="exportToHTML()">Download as HTML (Word Compatible)</button>
+        <button class="download-btn" onclick="copyTable()">Copy Table to Clipboard</button>
+        <p style="margin-top: 10px; font-size: 13px; color: #555;">
+            <strong>CSV:</strong> Open in Excel, Google Sheets, or any spreadsheet program<br>
+            <strong>HTML:</strong> Open in Word via File > Open, then save as .docx<br>
+            <strong>Clipboard:</strong> Paste directly into Word, Excel, or Google Docs
+        </p>
+    </div>
+
+    <div class="note">
+        <strong>Note on Citations:</strong> All page references <span class="citation">[p.X]</span> refer to the Fox-IT Technical Report. Information spans multiple pages; primary source pages are cited.
+    </div>
+
+    <table id="crimeScriptTable">
+        <thead>
+            <tr>
+                <th style="width: 8%">Stage</th>
+                <th style="width: 8%">Date/Time</th>
+                <th style="width: 25%">Activities</th>
+                <th style="width: 15%">Resources/Tools</th>
+                <th style="width: 12%">Skills Required</th>
+                <th style="width: 12%">Systems Targeted</th>
+                <th style="width: 20%">Prevention/Detection Opportunities</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="stage-header">
+                <td colspan="7">STAGE 1: PREPARATION</td>
+            </tr>
+            <tr>
+                <td>1. Preparation</td>
+                <td>Pre-Jan 6, 2025</td>
+                <td>
+                    <ul>
+                        <li>Obtained leaked credentials for account_lp2 and account_lp3 <span class="citation">[p.11-12]</span></li>
+                        <li>Fox-IT found credentials in publicly available leak document for one account <span class="citation">[p.12]</span></li>
+                        <li>At least two known data breaches contained info about other account <span class="citation">[p.12]</span></li>
+                        <li>Researched TU/e infrastructure</li>
+                        <li>Identified VPN as entry point without MFA <span class="citation">[p.11]</span></li>
+                        <li>Prepared exploitation tools</li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>Credential leak databases <span class="citation">[p.11-12]</span></li>
+                        <li>VPS hosting infrastructure <span class="citation">[p.11]</span></li>
+                        <li>Advanced IP Port Scanner <span class="citation">[p.16, p.23]</span></li>
+                        <li>SoftPerfect Network Scanner <span class="citation">[p.16, p.23]</span></li>
+                        <li>ShareFinder <span class="citation">[p.16, p.23]</span></li>
+                        <li>AnyDesk <span class="citation">[p.16-17, p.23]</span></li>
+                        <li>TeamViewer <span class="citation">[p.16-17, p.23]</span></li>
+                        <li>CrackMapExec <span class="citation">[p.5, p.12]</span></li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>Credential stuffing knowledge</li>
+                        <li>Windows Active Directory expertise</li>
+                        <li>NTLM authentication weaknesses <span class="citation">[p.13-14]</span></li>
+                        <li>Coercion attack techniques <span class="citation">[p.13-14]</span></li>
+                        <li>DCSync exploitation <span class="citation">[p.13-15]</span></li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>TU/e VPN infrastructure <span class="citation">[p.11]</span></li>
+                        <li>Public credential databases <span class="citation">[p.11-12]</span></li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>Credential monitoring services</li>
+                        <li>Dark web monitoring</li>
+                        <li>Proactive credential reset policies</li>
+                        <li>MFA implementation <span class="citation">[p.11]</span></li>
+                    </ul>
+                </td>
+            </tr>
+
+            <tr class="stage-header">
+                <td colspan="7">STAGE 2: ENTRY</td>
+            </tr>
+            <tr>
+                <td>2. Entry</td>
+                <td>Jan 6, 2025<br>13:57-14:13</td>
+                <td>
+                    <ul>
+                        <li>13:57 - Failed login attempt: account_lp1 from ip_adversary_1 <span class="citation">[p.11]</span></li>
+                        <li>14:08 - <strong>SUCCESSFUL LOGIN:</strong> account_lp2 from ip_adversary_1 <span class="citation">[p.11]</span></li>
+                        <li>14:13 - <strong>SUCCESSFUL LOGIN:</strong> account_lp3 from same IP <span class="citation">[p.11]</span></li>
+                        <li>Established VPN access to TU/e internal network <span class="citation">[p.11]</span></li>
+                        <li>Fox-IT considers this the start of the incident <span class="citation">[p.11, p.22]</span></li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>Leaked valid credentials <span class="citation">[p.11-12]</span></li>
+                        <li>VPS from hosting provider <span class="citation">[p.11]</span></li>
+                        <li>VPN client software</li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>Basic VPN usage</li>
+                        <li>Credential management</li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>TU/e VPN solution (no MFA enforced) <span class="citation">[p.11]</span></li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li><strong>MFA enforcement on VPN</strong> <span class="citation">[p.11]</span></li>
+                        <li>Geolocation-based access controls</li>
+                        <li>Hosting provider IP blocking</li>
+                        <li>Multiple accounts from single IP alerting <span class="citation">[p.11]</span></li>
+                        <li>Failed-then-successful login detection</li>
+                    </ul>
+                </td>
+            </tr>
+
+            <tr class="stage-header">
+                <td colspan="7">STAGE 3: PRE-CONDITION (Initial Reconnaissance)</td>
+            </tr>
+            <tr>
+                <td>3. Pre-condition</td>
+                <td>Jan 6-10, 2025</td>
+                <td>
+                    <ul>
+                        <li>15:14 (Jan 6) - account_lp2 began connecting to multiple systems <span class="citation">[p.11]</span></li>
+                        <li>Connections atypical for account_lp2 <span class="citation">[p.11]</span></li>
+                        <li>Rapid succession indicates automated authentications <span class="citation">[p.11]</span></li>
+                        <li>Conducted automated network reconnaissance <span class="citation">[p.11]</span></li>
+                        <li>Mapped network infrastructure</li>
+                        <li>Identified domain controllers and AD structure <span class="citation">[p.13]</span></li>
+                        <li>Located: SYSTEM_DC1_PROD, SYSTEM_DC2_PROD, SYSTEM_DC3_PROD, SYSTEM_DC4_PROD <span class="citation">[p.13, p.24]</span></li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>Network scanning tools</li>
+                        <li>VPN access <span class="citation">[p.11]</span></li>
+                        <li>Compromised user credentials <span class="citation">[p.11]</span></li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>Network reconnaissance</li>
+                        <li>Active Directory enumeration</li>
+                        <li>Automated scanning techniques <span class="citation">[p.11]</span></li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>Multiple domain-joined systems <span class="citation">[p.11]</span></li>
+                        <li>SYSTEM_DC1_PROD</li>
+                        <li>SYSTEM_DC2_PROD</li>
+                        <li>SYSTEM_DC3_PROD</li>
+                        <li>SYSTEM_DC4_PROD <span class="citation">[p.13]</span></li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>Behavioral analytics for atypical authentication patterns <span class="citation">[p.11]</span></li>
+                        <li>Network scanning detection</li>
+                        <li>Lateral movement alerts</li>
+                        <li>User behavior analytics (UBA)</li>
+                    </ul>
+                </td>
+            </tr>
+
+            <tr class="stage-header">
+                <td colspan="7">STAGE 4: INSTRUMENTAL PRE-CONDITION (Privilege Escalation Preparation)</td>
+            </tr>
+            <tr>
+                <td>4. Instrumental Pre-condition</td>
+                <td>Jan 6-11, 2025</td>
+                <td>
+                    <ul>
+                        <li>Identified domain controllers accepting NTLMv1 authentication <span class="citation">[p.13-14, p.24]</span></li>
+                        <li>Discovered lmcompatibilitylevel=1 on production DCs (allows NTLMv1) <span class="citation">[p.14, p.24]</span></li>
+                        <li>Table 12 shows 4 prod DCs with level 1 <span class="citation">[p.24]</span></li>
+                        <li>Prepared coercion attack infrastructure <span class="citation">[p.13-14]</span></li>
+                        <li>Targeted ACCOUNT_DC4_PROD for credential theft <span class="citation">[p.13-15]</span></li>
+                        <li>Set up hash cracking capability <span class="citation">[p.13-14]</span></li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>NTLM relay tools</li>
+                        <li>Hash cracking infrastructure <span class="citation">[p.13-14]</span></li>
+                        <li>Coercion attack tools <span class="citation">[p.13-14]</span></li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>NTLM protocol weaknesses knowledge <span class="citation">[p.13-14]</span></li>
+                        <li>Coercion attack execution <span class="citation">[p.13-14]</span></li>
+                        <li>Hash cracking techniques <span class="citation">[p.14]</span></li>
+                        <li>AD security misconfigurations <span class="citation">[p.14]</span></li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>Domain controller authentication mechanisms <span class="citation">[p.13-14]</span></li>
+                        <li>SYSTEM_DC4_PROD <span class="citation">[p.13-15]</span></li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li><strong>Disable NTLMv1 protocol</strong> <span class="citation">[p.14]</span></li>
+                        <li>Configure lmcompatibilitylevel=5 <span class="citation">[p.24]</span></li>
+                        <li>Network segmentation</li>
+                        <li>SMB signing enforcement</li>
+                        <li>LDAP signing requirements</li>
+                    </ul>
+                </td>
+            </tr>
+
+            <tr class="stage-header">
+                <td colspan="7">STAGE 5: INSTRUMENTAL INITIATION (Privilege Escalation Execution)</td>
+            </tr>
+            <tr>
+                <td>5. Instrumental Initiation</td>
+                <td>Jan 11, 2025<br>19:59-21:07</td>
+                <td>
+                    <strong>First DCSync Attempt (19:59):</strong> <span class="citation">[p.13]</span>
+                    <ul>
+                        <li>Auth to SYSTEM_DC4_PROD using ACCOUNT_DC4_PROD from ip_vpn_client_1</li>
+                        <li>DCSync attempt - <strong>UNSUCCESSFUL</strong> (Microsoft Defender detected)</li>
+                    </ul>
+                    <strong>Coercion Attack (~19:59-20:59):</strong> <span class="citation">[p.13-14]</span>
+                    <ul>
+                        <li>Table 4 shows NTLMv1 authentications from DC accounts to DCs from VPN IPs <span class="citation">[p.13]</span></li>
+                        <li>Jan 10, 14:32-14:51: Multiple DC account auths from ip_vpn_client_3 <span class="citation">[p.13]</span></li>
+                        <li>Likely coerced SYSTEM_DC4_PROD into NTLMv1 authentication <span class="citation">[p.14]</span></li>
+                        <li>Captured & cracked ACCOUNT_DC4_PROD NTLMv1 hash <span class="citation">[p.14]</span></li>
+                    </ul>
+                    <strong>Successful DCSync (20:59):</strong> <span class="citation">[p.13]</span>
+                    <ul>
+                        <li>Auth to SYSTEM_DC1_PROD as ACCOUNT_DC4_PROD from ip_vpn_client_2</li>
+                        <li>DCSync attack - <strong>SUCCESSFUL</strong> (Microsoft Defender alert) <span class="citation">[p.13]</span></li>
+                        <li>Retrieved all NTLM hashes from SYSTEM_DC1_PROD <span class="citation">[p.15]</span></li>
+                        <li>Obtained hash for break-glass account account_hp1 <span class="citation">[p.15]</span></li>
+                    </ul>
+                    <strong>Domain Compromise (21:07):</strong> <span class="citation">[p.15]</span>
+                    <ul>
+                        <li>Authenticated to SYSTEM_DC1_PROD using account_hp1 hash (pass-the-hash)</li>
+                        <li><strong>ENTERPRISE ADMIN PRIVILEGES ACHIEVED</strong> across DOMAIN_1 & DOMAIN_2 <span class="citation">[p.12, p.15]</span></li>
+                        <li>Full domain control established <span class="citation">[p.15]</span></li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>Cracked DC computer account credentials <span class="citation">[p.14-15]</span></li>
+                        <li>DCSync tools <span class="citation">[p.13]</span></li>
+                        <li>Pass-the-hash capabilities <span class="citation">[p.15]</span></li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>DCSync attack execution <span class="citation">[p.13-15]</span></li>
+                        <li>Pass-the-hash techniques <span class="citation">[p.15]</span></li>
+                        <li>Domain replication protocol abuse <span class="citation">[p.14-15]</span></li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>SYSTEM_DC4_PROD <span class="citation">[p.13]</span></li>
+                        <li>SYSTEM_DC1_PROD <span class="citation">[p.13-15]</span></li>
+                        <li>Break-glass account: account_hp1 <span class="citation">[p.12-13, p.15]</span></li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li><strong>Enable replication success logging</strong> <span class="citation">[p.15, p.24]</span></li>
+                        <li>Table 13: All prod DCs only logged failures <span class="citation">[p.24]</span></li>
+                        <li>DCSync detection rules</li>
+                        <li>Computer account authentication monitoring <span class="citation">[p.14]</span></li>
+                        <li>Microsoft Defender alert response <span class="citation">[p.13]</span></li>
+                        <li>Abnormal DC-to-DC authentication alerts</li>
+                    </ul>
+                </td>
+            </tr>
+
+            <tr class="stage-header">
+                <td colspan="7">STAGE 6: INSTRUMENTAL ACTUALIZATION (Post-Exploitation)</td>
+            </tr>
+            <tr>
+                <td>6. Instrumental Actualization</td>
+                <td>Jan 11, 21:07 - Jan 12, 01:17</td>
+                <td>
+                    <strong>Discovery Activities:</strong> <span class="citation">[p.16]</span>
+                    <ul>
+                        <li>22:43 - Advanced IP Port Scanner executed on system_srv2 <span class="citation">[p.16]</span></li>
+                        <li>22:53 - SoftPerfect Network Scanner on tfe290 <span class="citation">[p.16]</span></li>
+                        <li>23:56 - ShareFinder on SYSTEM_SRV4 (output: found_shares.txt) <span class="citation">[p.16]</span></li>
+                        <li>00:58 - Domain admin enumeration with Cyrillic comment "Find out DA" <span class="citation">[p.20]</span></li>
+                    </ul>
+                    <strong>Account Persistence:</strong> <span class="citation">[p.17]</span>
+                    <ul>
+                        <li>Compromised: account_hp2 (22:00), account_hp3 (22:01) <span class="citation">[p.17]</span></li>
+                        <li>Created: account_hp4 (22:46), account_hp5 (23:11) <span class="citation">[p.17]</span></li>
+                    </ul>
+                    <strong>Tool Persistence:</strong> <span class="citation">[p.16-17]</span>
+                    <ul>
+                        <li>AnyDesk installed: system_srv1 (23:27), system_srv3 (23:29), system_rootdc2_prod (00:23), system_dc1_prod (00:44) <span class="citation">[p.16-17, Table 7]</span></li>
+                        <li>TeamViewer installed: system_ws2 (22:36), system_ws1 (23:32), system_srv3 (23:58) <span class="citation">[p.16-17, Table 7]</span></li>
+                        <li>Confirmed connections to system_srv3 and system_srv1 <span class="citation">[p.16]</span></li>
+                    </ul>
+                    <strong>Ransomware Preparation:</strong> <span class="citation">[p.17]</span>
+                    <ul>
+                        <li>00:52 - Accessed Veeam backup on system_srv5 <span class="citation">[p.17]</span></li>
+                        <li>00:57 - Attempted to stop Veeam services via PowerShell <span class="citation">[p.17]</span></li>
+                    </ul>
+                    <strong>Scope:</strong> <span class="citation">[p.18]</span>
+                    <ul>
+                        <li>14 systems with hands-on-keyboard activity</li>
+                        <li>77 systems with authentication only</li>
+                        <li><strong>Total: 91 systems accessed</strong> out of 350 <span class="citation">[p.18, Table 9]</span></li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>Enterprise admin privileges <span class="citation">[p.12, p.18]</span></li>
+                        <li>AnyDesk <span class="citation">[p.16-17]</span></li>
+                        <li>TeamViewer <span class="citation">[p.16-17]</span></li>
+                        <li>Advanced IP Scanner <span class="citation">[p.16]</span></li>
+                        <li>SoftPerfect Network Scanner <span class="citation">[p.16]</span></li>
+                        <li>ShareFinder <span class="citation">[p.16]</span></li>
+                        <li>PowerShell <span class="citation">[p.17, p.20]</span></li>
+                        <li>CrackMapExec <span class="citation">[p.5, p.12]</span></li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>Post-exploitation techniques</li>
+                        <li>Persistence mechanisms <span class="citation">[p.16-17]</span></li>
+                        <li>Remote admin tool deployment <span class="citation">[p.16-17]</span></li>
+                        <li>Backup system manipulation <span class="citation">[p.17]</span></li>
+                        <li>Network share enumeration <span class="citation">[p.16]</span></li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>system_srv2, tfe290, SYSTEM_SRV4, system_srv5 <span class="citation">[p.16-17]</span></li>
+                        <li>system_srv1, system_srv3 <span class="citation">[p.16-17]</span></li>
+                        <li>system_ws1, system_ws2 <span class="citation">[p.17]</span></li>
+                        <li>system_dc1_prod, system_rootdc2_prod <span class="citation">[p.17]</span></li>
+                        <li><strong>Total: 91 systems</strong> <span class="citation">[p.18]</span></li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li><strong>EDR on all critical systems</strong> <span class="citation">[p.9, Table 2]</span></li>
+                        <li>Remote administration tool blocking <span class="citation">[p.9, Table 2]</span></li>
+                        <li>Application whitelisting</li>
+                        <li>Privileged account monitoring</li>
+                        <li>New account creation alerts <span class="citation">[p.12, Table 3]</span></li>
+                        <li>Backup system access monitoring <span class="citation">[p.17]</span></li>
+                        <li>File share access auditing</li>
+                    </ul>
+                </td>
+            </tr>
+
+            <tr class="stage-header">
+                <td colspan="7">STAGE 7: DOING (Criminal Objective - INTERRUPTED)</td>
+            </tr>
+            <tr>
+                <td>7. Doing</td>
+                <td>Jan 11-12, 2025</td>
+                <td>
+                    <strong>Intended Objective (Not Achieved):</strong> <span class="citation">[p.20-21]</span>
+                    <ul>
+                        <li>Ransomware deployment across domain (likely based on TTP profile) <span class="citation">[p.20-21]</span></li>
+                        <li>Mass system encryption</li>
+                        <li>Double-extortion scenario</li>
+                    </ul>
+                    <strong>What Was Accomplished:</strong>
+                    <ul>
+                        <li>~2.1 GB data exfiltrated to adversary IPs (Jan 5-12) <span class="citation">[p.19]</span></li>
+                        <li>Likely contents: VPN data, AD info (system names, usernames, password hashes) <span class="citation">[p.19-20]</span></li>
+                        <li>No evidence of large-scale data exfiltration <span class="citation">[p.20, p.22]</span></li>
+                        <li>ShareFinder results file no longer present <span class="citation">[p.16]</span></li>
+                        <li>Full enterprise admin access maintained <span class="citation">[p.18]</span></li>
+                        <li>Multiple persistence mechanisms established <span class="citation">[p.16-17]</span></li>
+                        <li>Backup disruption attempted <span class="citation">[p.17]</span></li>
+                    </ul>
+                    <strong>DETECTION & INTERRUPTION:</strong> <span class="citation">[p.5, p.12]</span>
+                    <ul>
+                        <li>21:55 (Jan 11) - SURFsoc alerted of malicious activity <span class="citation">[p.5]</span></li>
+                        <li>63 security alerts generated <span class="citation">[p.12, Table 3]</span></li>
+                        <li>22:48 - SURFsoc escalated to TU/e <span class="citation">[p.5]</span></li>
+                        <li>23:20 - FoxCERT informed <span class="citation">[p.5]</span></li>
+                        <li>00:15 (Jan 12) - Intake call between FoxCERT and TU/e <span class="citation">[p.5]</span></li>
+                        <li><strong>01:17 (Jan 12) - Network isolated, all traffic blocked</strong> <span class="citation">[p.5, p.22]</span></li>
+                        <li>Attack contained before ransomware deployment <span class="citation">[p.22]</span></li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>Full domain control <span class="citation">[p.15, p.18]</span></li>
+                        <li>Remote admin tools installed <span class="citation">[p.16-17]</span></li>
+                        <li>Multiple high-privileged accounts <span class="citation">[p.17]</span></li>
+                        <li>Backup access <span class="citation">[p.17]</span></li>
+                        <li>Command & control infrastructure <span class="citation">[p.19]</span></li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>Ransomware deployment (intended) <span class="citation">[p.20-21]</span></li>
+                        <li>Mass encryption techniques</li>
+                        <li>Data exfiltration management <span class="citation">[p.19-20]</span></li>
+                        <li>Double-extortion tactics</li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>Entire DOMAIN_1 and DOMAIN_2 <span class="citation">[p.12, p.18]</span></li>
+                        <li>All 350 systems theoretically accessible <span class="citation">[p.18]</span></li>
+                        <li>Backup infrastructure: system_srv5 <span class="citation">[p.17]</span></li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li><strong>SOC monitoring (successful)</strong> <span class="citation">[p.5, p.12]</span></li>
+                        <li>SIEM alert correlation <span class="citation">[p.5]</span></li>
+                        <li>Incident response procedures <span class="citation">[p.5-6, p.8]</span></li>
+                        <li>Network isolation capabilities <span class="citation">[p.5, p.8]</span></li>
+                        <li>Crisis management protocols <span class="citation">[p.5]</span></li>
+                        <li>Early ransomware indicators detection <span class="citation">[p.17, p.20]</span></li>
+                    </ul>
+                </td>
+            </tr>
+
+            <tr class="stage-header">
+                <td colspan="7">STAGE 8: EXIT (Post-Crime)</td>
+            </tr>
+            <tr>
+                <td>8. Exit</td>
+                <td>Jan 12, 2025 onwards</td>
+                <td>
+                    <strong>Forced Exit:</strong> <span class="citation">[p.5, p.22]</span>
+                    <ul>
+                        <li>01:17 - Network disconnection terminated all adversary connections <span class="citation">[p.5]</span></li>
+                        <li>VPN sessions terminated</li>
+                        <li>C2 channels to remote admin tools severed</li>
+                        <li>Ransomware deployment prevented <span class="citation">[p.22]</span></li>
+                    </ul>
+                    <strong>Evidence Left Behind:</strong>
+                    <ul>
+                        <li>Forensic artifacts across 91 systems <span class="citation">[p.18]</span></li>
+                        <li>63 SOC alerts in SIEM <span class="citation">[p.12]</span></li>
+                        <li>VPN authentication logs <span class="citation">[p.11, p.23, Table 11]</span></li>
+                        <li>Windows Event logs showing authentication anomalies <span class="citation">[p.13-15]</span></li>
+                        <li>Installed remote tools: AnyDesk, TeamViewer <span class="citation">[p.16-17, p.23, Table 10]</span></li>
+                        <li>Created user accounts: account_hp4, account_hp5 <span class="citation">[p.17, p.23]</span></li>
+                        <li>PowerShell command history with Cyrillic comments <span class="citation">[p.16-17, p.20]</span></li>
+                        <li>Firewall logs showing 2.1 GB data transfer <span class="citation">[p.19]</span></li>
+                        <li>Indicators of Compromise (IOCs) <span class="citation">[p.23, Table 10]</span></li>
+                    </ul>
+                    <strong>Adversary Attribution:</strong> <span class="citation">[p.20-21]</span>
+                    <ul>
+                        <li>Cyrillic characters in commands (Russian language) <span class="citation">[p.20]</span></li>
+                        <li>Off-the-shelf tools = commodity ransomware actor <span class="citation">[p.20-21]</span></li>
+                        <li>Non-stealthy techniques = not APT profile <span class="citation">[p.20]</span></li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>N/A (Exit forced by defender) <span class="citation">[p.5]</span></li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>N/A</li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>All compromised systems <span class="citation">[p.18]</span></li>
+                        <li>Network infrastructure <span class="citation">[p.5]</span></li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li><strong>Forensic investigation (Fox-IT)</strong> <span class="citation">[p.5-6]</span></li>
+                        <li>Investigation approach: 4 tracks <span class="citation">[p.7]</span></li>
+                        <li>Evidence collection via Acquire, disk images, firewall logs <span class="citation">[p.8]</span></li>
+                        <li>System restoration procedures <span class="citation">[p.9, Table 2]</span></li>
+                        <li>Security posture improvement recommendations <span class="citation">[p.8-9]</span></li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Key Findings Summary</h2>
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 30%">Category</th>
+                <th style="width: 70%">Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Attack Duration</td>
+                <td>January 6, 14:08 - January 12, 01:17, 2025 = <strong>5 days, 11 hours, 9 minutes</strong> <span class="citation">[p.11, p.5, p.22]</span></td>
+            </tr>
+            <tr>
+                <td>Initial Access Method</td>
+                <td>Leaked credentials + VPN without MFA <span class="citation">[p.11-12, p.22]</span></td>
+            </tr>
+            <tr>
+                <td>Privilege Escalation</td>
+                <td>NTLMv1 coercion attack → DCSync → Pass-the-hash <span class="citation">[p.13-15, p.22]</span></td>
+            </tr>
+            <tr>
+                <td>Highest Privilege Obtained</td>
+                <td>Enterprise Administrator (full domain control over DOMAIN_1 and DOMAIN_2) <span class="citation">[p.12, p.15, p.22]</span></td>
+            </tr>
+            <tr>
+                <td>Systems Compromised</td>
+                <td>91 systems (14 hands-on-keyboard, 77 authentication only) out of 350 total <span class="citation">[p.18, p.22]</span></td>
+            </tr>
+            <tr>
+                <td>Data Exfiltrated</td>
+                <td>~2.1 GB (primarily AD info: system names, usernames, password hashes); no large-scale exfiltration found <span class="citation">[p.19-20, p.22]</span></td>
+            </tr>
+            <tr>
+                <td>Threat Actor Profile</td>
+                <td>Ransomware operator (commodity, non-APT) with Russian language indicators <span class="citation">[p.20-21, p.22]</span></td>
+            </tr>
+            <tr>
+                <td>Criminal Objective</td>
+                <td>Ransomware deployment (presumed based on TTPs, not achieved) <span class="citation">[p.20, p.22]</span></td>
+            </tr>
+            <tr>
+                <td>Detection Point</td>
+                <td>SURFsoc alerts, January 11 at 21:55 (63 alerts generated) <span class="citation">[p.5, p.12]</span></td>
+            </tr>
+            <tr>
+                <td>Containment Action</td>
+                <td>Network isolation, January 12 at 01:17 <span class="citation">[p.5, p.22]</span></td>
+            </tr>
+            <tr>
+                <td>Outcome</td>
+                <td>Attack interrupted before ransomware deployment; swift containment prevented catastrophic damage <span class="citation">[p.22]</span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Critical Vulnerabilities Exploited</h2>
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 25%">Vulnerability</th>
+                <th style="width: 10%">Stage</th>
+                <th style="width: 30%">Impact</th>
+                <th style="width: 35%">Mitigation</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>No MFA on VPN <span class="citation">[p.11]</span></td>
+                <td>Stage 2</td>
+                <td>Enabled initial access with leaked credentials <span class="citation">[p.11-12]</span></td>
+                <td>Implement MFA on all remote access solutions <span class="citation">[p.11]</span></td>
+            </tr>
+            <tr>
+                <td>NTLMv1 acceptance on domain controllers <span class="citation">[p.14, p.24]</span></td>
+                <td>Stage 4-5</td>
+                <td>Enabled privilege escalation via coercion attack and hash cracking <span class="citation">[p.13-15]</span></td>
+                <td>Disable NTLMv1, set lmcompatibilitylevel=5 on all DCs <span class="citation">[p.14, p.24, Table 12]</span></td>
+            </tr>
+            <tr>
+                <td>Insufficient DC replication logging <span class="citation">[p.15, p.24]</span></td>
+                <td>Stage 5</td>
+                <td>Delayed DCSync detection; only failure events logged <span class="citation">[p.15, p.24, Table 13]</span></td>
+                <td>Enable success logging for Directory Service Replication events <span class="citation">[p.15, p.24]</span></td>
+            </tr>
+            <tr>
+                <td>Leaked credentials in public breaches <span class="citation">[p.11-12]</span></td>
+                <td>Stage 1-2</td>
+                <td>Provided valid access to VPN <span class="citation">[p.11-12]</span></td>
+                <td>Credential monitoring, proactive password resets, breach notification monitoring <span class="citation">[p.12]</span></td>
+            </tr>
+            <tr>
+                <td>Weak audit policies <span class="citation">[p.15, p.24]</span></td>
+                <td>Stages 3-6</td>
+                <td>Limited visibility into adversary activities <span class="citation">[p.13-18]</span></td>
+                <td>Comprehensive logging and SIEM integration <span class="citation">[p.9, Table 2]</span></td>
+            </tr>
+            <tr>
+                <td>No EDR on domain controllers <span class="citation">[p.9]</span></td>
+                <td>Stage 6</td>
+                <td>Delayed detection of remote administration tool installation <span class="citation">[p.16-17]</span></td>
+                <td>Deploy EDR on all critical infrastructure <span class="citation">[p.9, Table 2]</span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="note">
+        <strong>Reference:</strong> Cornish, D. B. (1994). The procedural analysis of offending and its relevance for situational prevention. <em>Crime Prevention Studies, 3</em>, 151-196.
+    </div>
+
+<script>
+    function exportToCSV() {
+        const tables = document.querySelectorAll('table');
+        let csv = 'Crime Script Analysis: TU/e Cyberattack (January 2025)\n';
+        csv += 'Based on Cornish (1994) Seven-Stage Crime Script Framework\n';
+        csv += 'Source: Fox-IT Technical Report REP_Armstrong_221856 (May 13, 2025)\n\n';
+
+        tables.forEach((table, index) => {
+            const rows = table.querySelectorAll('tr');
+            
+            if (index === 0) {
+                csv += 'MAIN CRIME SCRIPT TABLE\n';
+            } else if (index === 1) {
+                csv += '\n\nKEY FINDINGS SUMMARY\n';
+            } else if (index === 2) {
+                csv += '\n\nCRITICAL VULNERABILITIES\n';
+            }
+
+            rows.forEach(row => {
+                const cols = row.querySelectorAll('td, th');
+                const csvRow = Array.from(cols).map(col => {
+                    let text = col.textContent.trim();
+                    text = text.replace(/"/g, '""');
+                    return `"${text}"`;
+                }).join(',');
+                csv += csvRow + '\n';
+            });
+        });
+
+        const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'TUe_Cyberattack_Crime_Script_Analysis.csv';
+        link.click();
+    }
+
+    function exportToHTML() {
+        const htmlContent = document.documentElement.outerHTML;
+        const blob = new Blob([htmlContent], { type: 'text/html' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'TUe_Cyberattack_Crime_Script_Analysis.html';
+        link.click();
+    }
+
+    function copyTable() {
+        const tables = document.querySelectorAll('table');
+        let textContent = 'CRIME SCRIPT ANALYSIS: TU/e CYBERATTACK (January 2025)\n';
+        textContent += 'Based on Cornish (1994) Seven-Stage Crime Script Framework\n\n';
+
+        tables.forEach((table, index) => {
+            if (index === 0) {
+                textContent += '=== MAIN CRIME SCRIPT TABLE ===\n\n';
+            } else if (index === 1) {
+                textContent += '\n\n=== KEY FINDINGS SUMMARY ===\n\n';
+            } else if (index === 2) {
+                textContent += '\n\n=== CRITICAL VULNERABILITIES ===\n\n';
+            }
+
+            const rows = table.querySelectorAll('tr');
+            rows.forEach(row => {
+                const cols = row.querySelectorAll('td, th');
+                const rowText = Array.from(cols).map(col => col.textContent.trim()).join('\t');
+                textContent += rowText + '\n';
+            });
+        });
+
+        navigator.clipboard.writeText(textContent).then(() => {
+            alert('Table copied to clipboard! You can now paste it into Word, Excel, or Google Docs.');
+        }).catch(err => {
+            alert('Failed to copy. Please try the CSV or HTML export options.');
+        });
+    }
+</script>
+</body>
+</html>
